@@ -14,8 +14,8 @@ class ActividadController extends Controller
     public function index()
     {
         //
-        $actividad=Actividad::all();
-        return $actividad;
+        $actividads=Actividad::included()->filter()->sort()->get();
+        return $actividads;
     }
 
     /**
@@ -25,10 +25,16 @@ class ActividadController extends Controller
     {
         //
         $request->validate([
-            'name' =>'required|max:255',
+            'nombre_actividad' => 'required|max:255',
+            'user_id' => 'required',
+            'tema_id' => 'required',
+            'tipo_id' => 'required',
+            'multimedia_id' => 'required',
+            
         ]);
 
         $actividad=Actividad::create($request->all());
+
         return $actividad;
         
     }
@@ -39,7 +45,8 @@ class ActividadController extends Controller
     public function show(Actividad $actividad)
     {
         //
-        return $actividad;
+        $actividad = Actividad::included()->findOrFail($actividad);
+       return $actividad;
     }
 
     /**
@@ -49,10 +56,16 @@ class ActividadController extends Controller
     {
         //
         $request->validate([
-            'name' =>'required|max255',
+            'nombre_actividad' => 'required|max:255',
+            'user_id' => 'required',
+            'tema_id' => 'required',
+            'tipo_id' => 'required',
+            'multimedia_id' => 'required',
+            
         ]);
 
         $actividad->update($request->all());
+
         return $actividad;
     }
 

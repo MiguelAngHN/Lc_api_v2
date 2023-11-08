@@ -27,7 +27,8 @@ return new class extends Migration
             ->onDelete('set null');
             
 
-            $table->timestamps();
+
+
         });
     }
 
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_seccion');
+        Schema::dropIfExists('usuario_seccion');
     }
 };

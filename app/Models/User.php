@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function seccions(){
+        return $this->belongsToMany(Seccion::class, 'user_seccion');
+    }
+    
+   public function actividads(){
+    return $this->hasMany('App\Models\actividad');
+   }
 }
