@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class tema extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nombre_tema','seccion_id'];
+
+
+
     public function seccion(){
         return $this->belongsTo('App\Models\seccion');
     }

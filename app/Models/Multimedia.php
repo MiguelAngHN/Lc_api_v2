@@ -9,6 +9,8 @@ class multimedia extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['url'];
+
     public function actividads(){
         return $this->hasMany('App\Models\actividad');
     }

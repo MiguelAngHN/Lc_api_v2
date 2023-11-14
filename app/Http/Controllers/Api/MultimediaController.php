@@ -14,6 +14,8 @@ class MultimediaController extends Controller
     public function index()
     {
         //
+        $multimedias=Multimedia::included()->filter()->sort()->get();
+        return $multimedias;
     }
 
     /**
@@ -22,6 +24,13 @@ class MultimediaController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'url' => 'required|max:255',
+        ]);
+
+        $multimedia=Multimedia::create($request->all());
+
+        return $multimedia;
     }
 
     /**
@@ -30,6 +39,8 @@ class MultimediaController extends Controller
     public function show(Multimedia $multimedia)
     {
         //
+        $multimedia = Multimedia::included()->findOrFail($multimedia);
+        return $multimedia;
     }
 
     /**
@@ -38,6 +49,14 @@ class MultimediaController extends Controller
     public function update(Request $request, Multimedia $multimedia)
     {
         //
+        $request->validate([
+            'url' => 'required|max:255',
+            
+        ]);
+
+        $multimedia->update($request->all());
+
+        return $multimedia;
     }
 
     /**
@@ -46,5 +65,7 @@ class MultimediaController extends Controller
     public function destroy(Multimedia $multimedia)
     {
         //
+        $multimedia->delete();
+        return $multimedia;
     }
 }

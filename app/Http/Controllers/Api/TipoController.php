@@ -14,6 +14,8 @@ class TipoController extends Controller
     public function index()
     {
         //
+        $tipos=Tipo::included()->filter()->sort()->get();
+        return $tipos;
     }
 
     /**
@@ -22,6 +24,15 @@ class TipoController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre_tipo' => 'required|max:255',
+            'url' => 'required |max:255'
+            
+        ]);
+
+        $tipo=Tipo::create($request->all());
+
+        return $tipo;
     }
 
     /**
@@ -30,6 +41,8 @@ class TipoController extends Controller
     public function show(Tipo $tipo)
     {
         //
+        $tipo =Tipo::included()->findOrFail($tipo);
+       return $tipo;
     }
 
     /**
@@ -38,6 +51,15 @@ class TipoController extends Controller
     public function update(Request $request, Tipo $tipo)
     {
         //
+        $request->validate([
+            'nombre_tipo' => 'required|max:255',
+            'url' => 'required |max:255'
+            
+        ]);
+
+        $tipo->update($request->all());
+
+        return $tipo;
     }
 
     /**
@@ -46,5 +68,7 @@ class TipoController extends Controller
     public function destroy(Tipo $tipo)
     {
         //
+        $tipo->delete();
+        return $tipo;
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Seccions;
+use App\Models\Seccion;
 use Illuminate\Http\Request;
 
-class SeccionsController extends Controller
+class SeccionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +14,8 @@ class SeccionsController extends Controller
     public function index()
     {
         //
+        $seccions=Seccion::included()->filter()->sort()->get();
+        return $seccions;
     }
 
     /**
@@ -22,29 +24,49 @@ class SeccionsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre_seccion' => 'required|max:255',
+            
+        ]);
+
+        $seccion=Seccion::create($request->all());
+
+        return $seccion;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Seccions $seccions)
+    public function show(Seccion $seccion)
     {
         //
+        $seccion = Seccion::included()->findOrFail($seccion);
+        return $seccion;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Seccions $seccions)
+    public function update(Request $request, Seccion $seccion)
     {
         //
+        $request->validate([
+            'nombre_seccion' => 'required|max:255',
+            
+        ]);
+
+        $seccion->update($request->all());
+
+        return $seccion;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Seccions $seccions)
+    public function destroy(Seccion $seccion)
     {
         //
+        $seccion->delete();
+        return $seccion;
     }
 }

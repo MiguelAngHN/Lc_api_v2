@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class seccion extends Model
 {
     use HasFactory;
+    
+    protected $fillable = ['nombre_seccion'];
+
+
+
+
+
     // relacion de uno a muchos
     public function users (){
         return $this->belongsToMany(User::class, 'user_seccion');
