@@ -12,9 +12,8 @@ class ActividadController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-        $actividads=Actividad::included()->filter()->sort()->get();
+    {   
+        $actividads = Actividad::included()->get();//->filter()->sort()->get();
         return $actividads;
     }
 
@@ -45,7 +44,7 @@ class ActividadController extends Controller
     public function show(Actividad $actividad)
     {
         //
-        $actividad = Actividad::included()->findOrFail($actividad);
+        $actividad = Actividad::included()->findOrFail($actividad->id);
        return $actividad;
     }
 

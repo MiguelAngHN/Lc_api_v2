@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class seccion extends Model
+class Seccion extends Model
 {
     use HasFactory;
     
@@ -17,8 +17,7 @@ class seccion extends Model
 
     // relacion de uno a muchos
     public function users (){
-        return $this->belongsToMany(User::class, 'user_seccion');
-
+        return $this->belongsTo('App\Models\seccion');
     }
    
     public function temas(){

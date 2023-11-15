@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class tipo extends Model
+class Tipo extends Model
 {
     use HasFactory;
 
     protected $fillable = ['nombre_tipo','url'];
-    protected $allowIncluded=['posts','posts.user'];
+
+    protected $allowIncluded=['temas','temas.actividad'];
 
     public function actividads(){
         return $this->hasMany('App\Models\actividad');

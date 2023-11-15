@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Actividad;
+
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -44,10 +46,11 @@ class User extends Authenticatable
     ];
 
     public function seccions(){
-        return $this->belongsToMany(Seccion::class, 'user_seccion');
+        return $this->hasMany(Seccion::class);
     }
     
-   public function actividads(){
-    return $this->hasMany('App\Models\actividad');
+   public function actividades()
+   {
+        return $this->hasMany(Actividad::class, 'user_id');
    }
 }
