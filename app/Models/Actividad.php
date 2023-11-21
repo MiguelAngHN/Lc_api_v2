@@ -13,9 +13,10 @@ class Actividad extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre_actividad','user_id','tema_id','tipo_id'];
-
+    protected $fillable = ['nombre_actividad','user_id','tema_id','tipo_id'.'multimedia_id'];
     protected $allowIncluded=['user','tema','tipo','multimedia','tema.seccion'];
+    protected $allowFilter=['id','nombre_actividad','user_id','tema_id','tipo_id'.'multimedia_id'];
+    protected $allowSort=['id','nombre_actividad','user_id','tema_id','tipo_id'.'multimedia_id'];
 
     public function scopeIncluded(Builder $query){
        
@@ -37,6 +38,66 @@ class Actividad extends Model
       $query->with($relations);//se ejecuta el query con lo que tiene $relations en ultimas es el valor en la url de included
      
     }
+    //return $relations;
+// return $this->allowIncluded;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+public function scopeFilter(Builder $query){
+
+    
+    if(empty($this->allowFilter)||empty(request('filter'))){
+        return;
+    }
+    
+    $filters =request('filter');
+    $allowFilter= collect($this->allowFilter);
+
+    foreach($filters as $filter => $value){
+
+         if($allowFilter->contains($filter)){
+
+            $query->where($filter,'LIKE', '%'.$value.'%');
+
+     
+        }
+
+    }
+
+    //http://api.learncartoon/v1/actividads?filter[name]=user&filter[id]=1
+
+    }
+//////////////////////////////////////////////////////////////////////////////////
+
+
+public function scopeSort(Builder $query){
+
+    
+    if(empty($this->allowSort)||empty(request('sort'))){
+        return;
+    }
+    
+    
+    $sortFields = explode(',', request('sort'));
+    $allowSort= collect($this->allowSort);
+
+    foreach($sortFields as $sortField ){
+
+         if($allowSort->contains($sortField)){
+
+            $query->orderBy($sortField,'asc');
+     
+        }
+
+    }
+
+     //http://api.learncartoon/v1/actividads?sort=name
+    
+
+    }
+
 
     public function tema(){
         return $this->belongsTo(Tema::class);

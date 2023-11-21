@@ -26,6 +26,7 @@ class SeccionController extends Controller
         //
         $request->validate([
             'nombre_seccion' => 'required|max:255',
+            'user_id' => 'required',
             
         ]);
 
@@ -52,6 +53,9 @@ class SeccionController extends Controller
         //
         $request->validate([
             'nombre_seccion' => 'required|max:255',
+            'user_id' => 'required',
+            
+            
             
         ]);
 
