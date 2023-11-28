@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Actividad;
+use App\Models\Seccion;
 
 use Laravel\Sanctum\HasApiTokens;
 
@@ -45,8 +46,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    
+
     public function seccions(){
-        return $this->hasMany(Seccion::class);
+        return $this->hasMany(Seccion::class,'user_id');
     }
     
    public function actividades()

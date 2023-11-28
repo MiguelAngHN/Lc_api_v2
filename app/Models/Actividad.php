@@ -9,6 +9,7 @@ use App\Models\Tipo;
 use App\Models\Tema;
 use App\Models\User;
 use App\Models\Multimedia;
+
 class Actividad extends Model
 {
     use HasFactory;
@@ -69,6 +70,7 @@ public function scopeFilter(Builder $query){
     //http://api.learncartoon/v1/actividads?filter[name]=user&filter[id]=1
 
     }
+
 //////////////////////////////////////////////////////////////////////////////////
 
 
