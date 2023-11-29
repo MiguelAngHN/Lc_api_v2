@@ -41,7 +41,7 @@ class TemaController extends Controller
     public function show(Tema $tema)
     {
         //
-        $tema = Tema::included()->findOrFail($tema);
+        $tema = Tema::included()->findOrFail($tema ->id);
        return $tema;
     }
 

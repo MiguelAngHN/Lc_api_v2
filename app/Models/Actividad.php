@@ -16,7 +16,7 @@ class Actividad extends Model
 
     protected $fillable = ['nombre_actividad','user_id','tema_id','tipo_id'.'multimedia_id'];
     protected $allowIncluded=['user','tema','tipo','multimedia','tema.seccion'];
-    protected $allowFilter=['id','nombre_actividad','user_id','tema_id','tipo_id'.'multimedia_id'];
+    protected $allowFilter=['id','nombre_tema','user_id','tema_id','tipo_id'.'multimedia_id'];
     protected $allowSort=['id','nombre_actividad','user_id','tema_id','tipo_id'.'multimedia_id'];
 
     public function scopeIncluded(Builder $query){

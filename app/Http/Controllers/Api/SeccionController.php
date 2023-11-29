@@ -41,7 +41,7 @@ class SeccionController extends Controller
     public function show(Seccion $seccion)
     {
         //
-        $seccion = Seccion::included()->findOrFail($seccion);
+        $seccion = Seccion::included()->findOrFail($seccion ->id);
         return $seccion;
     }
 

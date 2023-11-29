@@ -11,12 +11,9 @@ class Tipo extends Model
     use HasFactory;
 
     protected $fillable = ['nombre_tipo','url'];
-
     protected $allowIncluded=['temas','temas.actividad'];
 
-    public function actividads(){
-        return $this->hasMany('App\Models\actividad');
-       }
+   
 
        public function scopeIncluded(Builder $query){
        
@@ -44,5 +41,9 @@ class Tipo extends Model
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+
+public function actividads(){
+    return $this->hasMany('App\Models\actividad');
+   }
 
 }

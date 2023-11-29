@@ -13,9 +13,10 @@ class Tema extends Model
     use HasFactory;
 
     protected $fillable = ['nombre_tema','seccion_id'];
-    protected $allowIncluded=['seccion','actividad'];
-
-
+    protected $allowIncluded=['seccion','actividad','seccion.user'];
+    protected $allowFilter=['id','nombre_tema','seccion_id'];
+    protected $allowSort=['id','nombre_tema','seccion_id'];
+    
 
     public function scopeIncluded(Builder $query){
        
@@ -43,11 +44,69 @@ class Tema extends Model
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+    public function scopeFilter(Builder $query){
+
+        
+        if(empty($this->allowFilter)||empty(request('filter'))){
+            return;
+        }
+        
+        $filters =request('filter');
+        $allowFilter= collect($this->allowFilter);
+
+        foreach($filters as $filter => $value){
+
+            if($allowFilter->contains($filter)){
+
+                $query->where($filter,'LIKE', '%'.$value.'%');
+
+        
+            }
+
+        }
+
+        //http://api.learncartoon/v1/actividads?filter[name]=user&filter[id]=1
+
+        }
+
+    //////////////////////////////////////////////////////////////////////////////////
+
+
+    
+    public function scopeSort(Builder $query){
+
+        
+        if(empty($this->allowSort)||empty(request('sort'))){
+            return;
+        }
+        
+        
+        $sortFields = explode(',', request('sort'));
+        $allowSort= collect($this->allowSort);
+
+        foreach($sortFields as $sortField ){
+
+            if($allowSort->contains($sortField)){
+
+                $query->orderBy($sortField,'asc');
+        
+            }
+
+        }
+
+        //http://api.learncartoon/v1/actividads?sort=name
+        
+
+        }
+
+
+
+
 
     public function seccion(){
         return $this->belongsTo(Seccion::class, 'seccion_id');
     }
-    public function actividads(){
+    public function actividad(){
         return $this->belongsTo(Actividad::class);
     }
 }
