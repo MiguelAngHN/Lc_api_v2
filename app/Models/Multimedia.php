@@ -12,33 +12,62 @@ class Multimedia extends Model
     use HasFactory;
 
     protected $fillable = ['url'];
-    protected $allowIncluded=['actividada'];
+    protected $allowFilter=['id','url'];
+    protected $allowSort=['id','url'];
 
+    public function scopeFilter(Builder $query){
 
-    public function scopeIncluded(Builder $query){
-       
-        if(empty($this->allowIncluded)||empty(request('included'))){
+        
+        if(empty($this->allowFilter)||empty(request('filter'))){
             return;
         }
         
-        $relations = explode(',', request('included'));//['posts','relation2']
-       
-        $allowIncluded=collect($this->allowIncluded);//colocamos en una colecion lo que tiene $allowIncluded en este caso = ['posts','posts.user']
-    
-        foreach($relations as $key => $relationship){//recorremos el array de relaciones
-            
-            if(!$allowIncluded->contains($relationship)){
-                unset($relations[$key]);
-            }
-        
-        }
-      $query->with($relations);//se ejecuta el query con lo que tiene $relations en ultimas es el valor en la url de included
-     
-    }
-    //return $relations;
-// return $this->allowIncluded;
+        $filters =request('filter');
+        $allowFilter= collect($this->allowFilter);
 
-///////////////////////////////////////////////////////////////////////////////////////////
+        foreach($filters as $filter => $value){
+
+            if($allowFilter->contains($filter)){
+
+                $query->where($filter,'LIKE', '%'.$value.'%');
+
+        
+            }
+
+        }
+
+
+        }
+
+    //////////////////////////////////////////////////////////////////////////////////
+
+    public function scopeSort(Builder $query){
+
+    
+        if(empty($this->allowSort)||empty(request('sort'))){
+            return;
+        }
+        
+        
+        $sortFields = explode(',', request('sort'));
+        $allowSort= collect($this->allowSort);
+    
+        foreach($sortFields as $sortField ){
+    
+             if($allowSort->contains($sortField)){
+    
+                $query->orderBy($sortField,'asc');
+         
+            }
+    
+        }
+    
+         //http://api.learncartoon/v1/multimedia?sort=name
+        
+    
+        }
+
+    
 
     public function actividads(){
         return $this->hasMany(Actividad::class);

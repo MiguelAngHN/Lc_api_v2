@@ -13,7 +13,7 @@ class TemaController extends Controller
      */
     public function index()
     {
-        //
+         //
         $temas=Tema::included()->filter()->sort()->get();
         return $temas;
     }

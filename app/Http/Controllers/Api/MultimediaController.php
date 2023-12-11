@@ -14,7 +14,7 @@ class MultimediaController extends Controller
     public function index()
     {
         //
-        $multimedias=Multimedia::included()->filter()->sort()->get();
+        $multimedias=Multimedia::filter()->sort()->get();
         return $multimedias;
     }
 

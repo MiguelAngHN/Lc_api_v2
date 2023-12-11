@@ -66,7 +66,7 @@ class Seccion extends Model
 
         }
 
-        //http://api.learncartoon/v1/actividads?filter[name]=user&filter[id]=1
+        //http://api.learncartoon/v1/seccions?filter[name]=user&filter[id]=1
 
         }
 
@@ -93,7 +93,7 @@ class Seccion extends Model
     
         }
     
-         //http://api.learncartoon/v1/actividads?sort=name
+         //http://api.learncartoon/v1/seccions?sort=name
         
     
         }

@@ -14,7 +14,7 @@ class TipoController extends Controller
     public function index()
     {
         //
-        $tipos=Tipo::included()->filter()->sort()->get();
+        $tipos=Tipo::filter()->sort()->get();
         return $tipos;
     }
 
