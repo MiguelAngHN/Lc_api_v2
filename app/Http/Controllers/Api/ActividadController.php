@@ -13,7 +13,8 @@ class ActividadController extends Controller
      */
     public function index()
     {   
-        $actividads=Actividad::included()->filter()->sort()->get();
+        $actividads=Actividad::included()->filter()->sort()->with('tipo')->get();
+
         return $actividads;
     }
 

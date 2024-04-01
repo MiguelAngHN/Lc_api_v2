@@ -70,8 +70,8 @@ class Tipo extends Model
 
     
 
-public function actividads(){
-    return $this->hasMany('App\Models\actividad');
+public function actividad(){
+     return $this->hasMany('App\Models\Actividad');
    }
 
 }

@@ -110,7 +110,7 @@ public function scopeSort(Builder $query){
     }
 
     public function tipo(){
-        return $this->belongsTo(Tipo::class);
+        return $this->belongsTo('App\Models\Tipo');
     }
 
     public function multimedia(){

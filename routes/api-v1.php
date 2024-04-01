@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TemaController;
 use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\Api\SeccionController;
+use App\Http\Controllers\Api\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,12 +38,6 @@ Route::get('actividads/{actividad}', [ActividadController::class,'show'])->name(
 Route::put('actividads/{actividad}', [ActividadController::class,'update'])->name('api.v1.actividads.update');
 Route::delete('actividads/{actividad}', [ActividadController::class,'destroy'])->name('api.v1.actividads.delete');
 
-Route::get('tipos', [TipoController::class,'index'])->name('api.v1.tipos.index');
-Route::post('tipos', [TipoController::class,'store'])->name('api.v1.tipos.store');
-Route::get('tipos/{tipo}', [TipoController::class,'show'])->name('api.v1.tipos.show');
-Route::put('tipos/{tipo}', [TipoController::class,'update'])->name('api.v1.tipos.update');
-Route::delete('tipos/{tipo}', [TipoController::class,'destroy'])->name('api.v1.tipos.delete');
-
 Route::get('temas', [TemaController::class,'index'])->name('api.v1.temas.index');
 Route::post('temas', [TemaController::class,'store'])->name('api.v1.temas.store');
 Route::get('temas/{tema}', [TemaController::class,'show'])->name('api.v1.temas.show');
@@ -61,3 +56,14 @@ Route::get('seccions/{seccion}', [SeccionController::class,'show'])->name('api.v
 Route::put('seccions/{seccion}', [SeccionController::class,'update'])->name('api.v1.seccions.update');
 Route::delete('seccions/{seccion}', [SeccionController::class,'destroy'])->name('api.v1.seccions.delete');
 
+Route::get('clients', [ClientController::class,'index'])->name('api.v1.clients.index');
+Route::post('clients', [ClientController::class,'store'])->name('api.v1.clients.store');
+Route::get('clients/{client}', [ClientController::class,'show'])->name('api.v1.clients.show');
+Route::put('clients/{client}', [ClientController::class,'update'])->name('api.v1.clients.update');
+Route::delete('clients/{client}', [ClientController::class,'destroy'])->name('api.v1.clients.delete');
+
+Route::get('tipos', [TipoController::class,'index'])->name('api.v1.tipos.index');
+Route::post('tipos', [TipoController::class,'store'])->name('api.v1.tipos.store');
+Route::get('tipos/{id}', [TipoController::class,'show'])->name('api.v1.tipos.show');
+Route::put('tipos/{tipo}', [TipoController::class,'update'])->name('api.v1.tipos.update');
+Route::delete('tipos/{tipo}', [TipoController::class,'destroy'])->name('api.v1.tipos.delete');

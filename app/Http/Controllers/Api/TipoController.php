@@ -14,8 +14,11 @@ class TipoController extends Controller
     public function index()
     {
         //
-        $tipos=Tipo::filter()->sort()->get();
+        //  $tipos=Tipo::filter()->sort()->get();
+        $tipos = Tipo::filter()->sort()->with('actividad')->get();
+        // return response()->json($tipos);
         return $tipos;
+        
     }
 
     /**
@@ -24,25 +27,23 @@ class TipoController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'nombre_tipo' => 'required|max:255',
-            'url' => 'required |max:255'
-            
-        ]);
+        $tipo = new Tipo;
+        $tipo->nombre_tipo = $request->nombre_tipo;
+        $tipo->url = $request->url;
+        $tipo->save();
 
-        $tipo=Tipo::create($request->all());
-
-        return $tipo;
+        return response()->json($tipo);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tipo $tipo)
+    public function show($id)
     {
         //
-        $tipo =Tipo::included()->findOrFail($tipo);
-       return $tipo;
+        // $tipos =Tipo::all()->with('actividads')->findOrFail($tipo);
+        $tipos = Tipo::find($id)->with('actividad')->get();
+        return $tipos;
     }
 
     /**
@@ -51,15 +52,11 @@ class TipoController extends Controller
     public function update(Request $request, Tipo $tipo)
     {
         //
-        $request->validate([
-            'nombre_tipo' => 'required|max:255',
-            'url' => 'required |max:255'
-            
-        ]);
+        $tipo->nombre_tipo = $request->nombre_tipo;
+        $tipo->url = $request->url;
+        $tipo->save();
 
-        $tipo->update($request->all());
-
-        return $tipo;
+        return response()->json($tipo);
     }
 
     /**
@@ -69,6 +66,6 @@ class TipoController extends Controller
     {
         //
         $tipo->delete();
-        return $tipo;
+        return response()->json($tipo);
     }
 }
