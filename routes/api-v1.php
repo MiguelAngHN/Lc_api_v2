@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\TemaController;
 use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\Api\SeccionController;
 use App\Http\Controllers\Api\ClientController;
-
+use App\Http\Controllers\API\BocetoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -67,3 +67,9 @@ Route::post('tipos', [TipoController::class,'store'])->name('api.v1.tipos.store'
 Route::get('tipos/{id}', [TipoController::class,'show'])->name('api.v1.tipos.show');
 Route::put('tipos/{tipo}', [TipoController::class,'update'])->name('api.v1.tipos.update');
 Route::delete('tipos/{tipo}', [TipoController::class,'destroy'])->name('api.v1.tipos.delete');
+
+Route::get('bocetos', [BocetoController::class,'index'])->name('api.v1.bocetos.index');
+Route::post('bocetos',[BocetoController::class,'store'])->name('api.v1.bocetos');
+Route::get('bocetos/{boceto}', [BocetoController::class,'show'])->name('api.v1.bocetos.show');
+Route::put('bocetos/{boceto}', [BocetoController::class,'update'])->name('api.v1.bocetos.update');
+Route::delete('bocetos/{boceto}', [BocetoController::class,'destroy'])->name('api.v1.bocetos.delete');

@@ -12,10 +12,10 @@ class Tema extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre_tema','seccion_id'];
+    protected $fillable = ['nombre_tema', 'descripcion', 'url_imagen','seccion_id'];
     protected $allowIncluded=['seccion','actividad','seccion.user'];
-    protected $allowFilter=['id','nombre_tema','seccion_id'];
-    protected $allowSort=['id','nombre_tema','seccion_id'];
+    protected $allowFilter=['id','nombre_tema', 'descripcion', 'url_imagen','seccion_id'];
+    protected $allowSort=['id','nombre_tema', 'descripcion', 'url_imagen','seccion_id'];
     
 
     public function scopeIncluded(Builder $query){

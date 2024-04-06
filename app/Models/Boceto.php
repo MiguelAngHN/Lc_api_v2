@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Actividad;
-use App\Models\Seccion;
 
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Boceto extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -22,10 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nombre_usuario',
-        'email',
-        'password',
-        'rol',
+        'nombre_boceto',
+        'url',
     ];
 
     /**
@@ -49,8 +45,8 @@ class User extends Authenticatable
     // ];
 
 
-    protected $allowFilter=['id','nombre_usuario','email','password', 'rol','password_confirmation'];
-    protected $allowSort=['id','nombre_usuario','email','password', 'rol'];
+    protected $allowFilter=['id', 'nombre_boceto', 'url'];
+    protected $allowSort=['id' ,'nombre_boceto', 'url'];
 
     
 public function scopeFilter(Builder $query){
@@ -106,14 +102,4 @@ public function scopeSort(Builder $query){
     
 
     }
-
-
-
-    public function seccions(){
-        return $this->hasMany(Seccion::class,'user_id');
-    }
-    
-   public function actividades(){
-      return $this->hasMany(Actividad::class, 'user_id');
-   }
 }
