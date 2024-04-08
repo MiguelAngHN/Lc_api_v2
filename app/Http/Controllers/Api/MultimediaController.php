@@ -121,7 +121,6 @@ class MultimediaController extends Controller
         return response()->json($multimedia, 201);
     }
     
-    
 
     //     public function store(Request $request)
     // {

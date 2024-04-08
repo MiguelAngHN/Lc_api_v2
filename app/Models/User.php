@@ -25,7 +25,6 @@ class User extends Authenticatable
         'nombre_usuario',
         'email',
         'password',
-        'rol',
     ];
 
     /**
@@ -49,8 +48,8 @@ class User extends Authenticatable
     // ];
 
 
-    protected $allowFilter=['id','nombre_usuario','email','password', 'rol','password_confirmation'];
-    protected $allowSort=['id','nombre_usuario','email','password', 'rol'];
+    protected $allowFilter=['id','nombre_usuario','email','password','password_confirmation'];
+    protected $allowSort=['id','nombre_usuario','email','password'];
 
     
 public function scopeFilter(Builder $query){
